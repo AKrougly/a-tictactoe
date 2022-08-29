@@ -1,21 +1,24 @@
 import React from 'react';
 
+import { TBoard } from 'models/ITictactoe';
 import Cell from './Cell';
 
 import { useColumnStyles  } from "styles/columnStyles";
 
 export interface IColumnProps {
-  column: number[],
-  j: number,
+  board: TBoard,
+  row: number,
 }
 
-const Column: React.FC<IColumnProps> = ({ column, j }) => {
+const Column: React.FC<IColumnProps> = ({ board, row }) => {
   const { classes } = useColumnStyles();
 
   return (
     <div className={classes.root}>
-      {column.map((value, i) => (
-        <Cell key={`${i}_${j}`} value={value} i={i} j={j} />
+      {board.map((value, i) => (
+        Math.floor(i / 3) === row
+        ? <Cell key={`${i}`} value={value} cell={ i } />
+        : null
       ))}
     </div>
   );

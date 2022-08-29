@@ -1,5 +1,5 @@
-import { /*ITictactoe,*/ ITictactoeState, initialTictactoeState } from 'models/ITictactoe';
-
+import { ITictactoe, initialTictactoe, TBoard, TCell, TCells } from 'models/ITictactoe';
+/*
 const WINNING_COMBOS: number[][][] = [
   [
     [0, 0],
@@ -42,57 +42,64 @@ const WINNING_COMBOS: number[][][] = [
     [2, 0],
   ], // Second diagonal
 ];
+*/
+const WINNING_COMBOS: TCells[] = [
+  [0, 3, 6], // Left side
+  [0, 1, 2], // Top side
+  [2, 5, 8], // Right side
+  [6, 7, 8], // Bottom side
+  [1, 4, 7], // Middle vertical
+  [3, 4, 5], // Middle horizontal
+  [0, 4, 8], // First diagonal
+  [2, 4, 6], // Second diagonal
+];
 
 export default class Tictactoe {
-  state: ITictactoeState = Object.assign({}, initialTictactoeState);
+  tictactoe: ITictactoe = Object.assign({}, initialTictactoe);
 
-  constructor(_state: ITictactoeState) {
-    this.reset(_state);
+  constructor(_tictactoe: ITictactoe) {
+    this.reset(_tictactoe);
+  }
+
+  reset(_tictactoe: ITictactoe) {
+    this.tictactoe = {
+      ...this.tictactoe,
+      board: _tictactoe.board, nextPlayer: _tictactoe.nextPlayer, winner: _tictactoe.winner
+    };
+
+    this.tictactoe.winner = this.getWinner;
   }
 
   get board() {
-    return this.state.tictactoe.board;
+    return this.tictactoe.board;
   }
 
   get nextPlayer() {
-    return this.state.tictactoe.nextPlayer;
+    return this.tictactoe.nextPlayer;
   }
 
   get winner() {
-    return this.state.tictactoe.winner;
+    return this.tictactoe.winner;
   }
 
-  get emptyCells() {
-    const cells = [];
-
-    for (let x = 0; x < 3; x++) {
-      for (let y = 0; y < 3; y++) {
-        if (!this.board[x][y]) cells.push([x, y]); // Empty spaces will be `0` (falsey)
-      }
-    }
-
-    return cells;
-  }
-
-  hasWon = ([x1, y1]: number[], [x2, y2]: number[], [x3, y3]: number[]): number => {
-    const player = this.board[x1][y1];
-    return this.board[x2][y2] === player && this.board[x3][y3] === player ? player : 0;
+  hasWon = (threeCells: TCell[]): number => {
+    const player = this.board[threeCells[1]];
+    return this.board[threeCells[0]] === player && player === this.board[threeCells[2]] ? player : 0;
   };
 
-  get getEmptyCells(): number[][] {
-    const cells: number[][] = [];
+  get getEmptyCells(): TCells {
+    const cells: TCells = [];
   
-    for (let x = 0; x < 3; x++) {
-      for (let y = 0; y < 3; y++) {
-        if (!this.board[x][y]) cells.push([x, y]); // Empty spaces will be `0` (falsey)
-      }
+    for (let i = 0; i < 9; i++) {
+      if (!this.board[i]) cells.push(i);
     }
-  
+
     return cells;
   };
   
   get getWinner(): number {
-    const emptyCells: number[][] = this.getEmptyCells;
+    //console.log('getWinner');
+    const emptyCells: TCells = this.getEmptyCells;
 
     if (emptyCells.length > 4) return 0; // Game cannot be won until the 5th move
   
@@ -101,7 +108,7 @@ export default class Tictactoe {
     let winner = 0;
   
     do {
-      winner = this.hasWon.apply(this, WINNING_COMBOS[combosLeft - 1] as [number[], number[], number[]]);
+      winner = this.hasWon.apply(this, [WINNING_COMBOS[combosLeft - 1] as TCell[]]);
   
       combosLeft--;
     } while (!winner && combosLeft > 0);
@@ -110,50 +117,31 @@ export default class Tictactoe {
     return !winner && emptyCells.length === 0 ? -1 : winner;
   };
 
-  reset(_state: ITictactoeState) {
-    //console.log(_state.tictactoe);
-    this.state = {
-      ...this.state,
-      tictactoe: {
-        ...this.state.tictactoe,
-        board: _state.tictactoe.board, nextPlayer: _state.tictactoe.nextPlayer, winner: _state.tictactoe.winner
-      }
-    };
-
-    this.state.tictactoe.winner = this.getWinner;
-    //console.log(this.state.tictactoe);
+  validMove(move: TCell): boolean {
+    return move >= 0 && move < 9;
   }
 
-  validMove(i: number, j: number): boolean {
-    return i >= 0 && i < 3 && j >= 0 && j < 3;
+  setCell(board: TBoard, move: TCell): TBoard {
+    return board.map((cell, i) =>
+    i === move
+    ? this.tictactoe.nextPlayer
+    : cell
+    )
   }
 
-  makeMove(i: number, j: number) {
-    //console.log('i: ' + i + ' j: ' + j);
+  makeMove(move: TCell) {
     // Return early on invalid move
-    if (!this.validMove(i, j) || this.winner !== 0 || this.board[j][i]) return this.state.tictactoe;
+    //console.log('i:'+i+' j:'+j+' player:'+this.tictactoe.nextPlayer+' winner:'+this.winner+' board[j][i]:'+this.board[j][i]);
+    if (!this.validMove(move) || this.winner !== 0 || this.board[move]) return this.tictactoe;
 
     // Set chosen space to "next player" ID
-    //console.log(this.state.tictactoe.nextPlayer);
-    //console.log(this.state.tictactoe.board);
-    this.state.tictactoe.board =
-      this.state.tictactoe.board.map((col, c) =>
-      c === j
-        ? col.map((row, r) =>
-            r === i
-              ? this.state.tictactoe.nextPlayer
-              : row
-          )
-        : col
-      );
+    this.tictactoe.board = this.setCell(this.tictactoe.board, move);
+    this.tictactoe = {
+      board: this.tictactoe.board,
+      nextPlayer: this.tictactoe.nextPlayer === 1 ? 2 : 1,
+      winner: this.getWinner,
+    }
 
-      this.state.tictactoe.nextPlayer = this.state.tictactoe.nextPlayer === 1 ? 2 : 1;
-      this.state.tictactoe.winner = this.getWinner;
-
-    return this.state;
-  }
-
-  get compMove(): {i: number, j: number} {
-    return {i: 1, j: 1 };
+    return this.tictactoe;
   }
 }

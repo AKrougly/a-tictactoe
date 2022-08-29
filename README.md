@@ -1,5 +1,9 @@
 # a-tictactoe
-tic-tac-toe game with react and redux toolkit
+tic-tac-toe game using typescript, react and redux toolkit styled with scss and tss-react/mui
+
+modified version of https://reactjsexample.com/undefeatable-tic-tac-toe-es6-react-and-react-hooks/
+using typescript, react, and redux toolkit
+differs from the author's modification https://github.com/awkaiser/react-tictactoe
 
 # Getting Started with Create React App
 
@@ -9,6 +13,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 
+### `npm install`
 ### `npm start`
 
 Runs the app in the development mode.\

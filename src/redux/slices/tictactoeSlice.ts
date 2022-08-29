@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import storage from "utils/localStorage";
-import { /*ITictactoe,*/ ITictactoeState, initialTictactoeState } from 'models/ITictactoe';
+import { /*ITictactoe,*/ ITictactoeState, initialTictactoeState, TCell } from 'models/ITictactoe';
 import { CTictactoe } from 'pages/tictactoe/TictactoeGame';
 import { RootState, AppThunk } from '../store';
 
@@ -22,11 +22,14 @@ const tictactoeSlice = createSlice({
     resetTictactoe: (state) => {
       return { ...state, ...initialState };
     },
-    makeMove: (state, { payload: { i, j } }: PayloadAction<{ i: number, j: number }>) => {
+    makeMove: (state, action: PayloadAction<TCell>) => {
       return {
         ...state,
-        ...CTictactoe.makeMove(i, j),
-      };
+        tictactoe: {
+          ...state.tictactoe,
+          ...CTictactoe.makeMove(action.payload)
+        }
+      }
     },
   },
 });
