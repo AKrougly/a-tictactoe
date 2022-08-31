@@ -1,9 +1,12 @@
 # a-tictactoe
-tic-tac-toe game using typescript, react and redux toolkit styled with scss and tss-react/mui
+tic-tac-toe game using typescript, react and redux toolkit styled with scss
 
-modified version of https://reactjsexample.com/undefeatable-tic-tac-toe-es6-react-and-react-hooks/
-using typescript, react, and redux toolkit
-differs from the author's modification https://github.com/awkaiser/react-tictactoe
+The game starts in two player mode.
+When the opponent's move, you can switch to the game mode with a Mega Brain, then the computer will become your opponent.
+
+Modified version of https://reactjsexample.com/undefeatable-tic-tac-toe-es6-react-and-react-hooks/
+Using typescript, react, and redux toolkit
+It differs from the last version revised by the author. https://github.com/awkaiser/react-tictactoe
 
 # Getting Started with Create React App
 

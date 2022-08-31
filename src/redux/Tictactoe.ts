@@ -1,48 +1,5 @@
 import { ITictactoe, initialTictactoe, TBoard, TCell, TCells } from 'models/ITictactoe';
-/*
-const WINNING_COMBOS: number[][][] = [
-  [
-    [0, 0],
-    [0, 1],
-    [0, 2],
-  ], // Left side
-  [
-    [0, 0],
-    [1, 0],
-    [2, 0],
-  ], // Top side
-  [
-    [2, 0],
-    [2, 1],
-    [2, 2],
-  ], // Right side
-  [
-    [0, 2],
-    [1, 2],
-    [2, 2],
-  ], // Bottom side
-  [
-    [1, 0],
-    [1, 1],
-    [1, 2],
-  ], // Middle vertical
-  [
-    [0, 1],
-    [1, 1],
-    [2, 1],
-  ], // Middle horizontal
-  [
-    [0, 0],
-    [1, 1],
-    [2, 2],
-  ], // First diagonal
-  [
-    [0, 2],
-    [1, 1],
-    [2, 0],
-  ], // Second diagonal
-];
-*/
+
 const WINNING_COMBOS: TCells[] = [
   [0, 3, 6], // Left side
   [0, 1, 2], // Top side

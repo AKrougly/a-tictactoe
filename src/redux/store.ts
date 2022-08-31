@@ -1,12 +1,8 @@
 import { combineReducers, configureStore, Action } from "@reduxjs/toolkit";
 import { ThunkAction } from 'redux-thunk';
-import themeReducer from "./slices/themeSlice";
-import notificationReducer from "./slices/notificationSlice";
 import tictactoeReducer from "./slices/tictactoeSlice";
 
 const rootReducer = combineReducers({
-	theme: themeReducer,
-	notification: notificationReducer,
 	tictactoe: tictactoeReducer,
 })
 

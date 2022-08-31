@@ -2,18 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 
-import createCache from '@emotion/cache';
-import { CacheProvider } from "@emotion/react";
-
 import { setupStore } from './redux/store';
 import storage from './utils/localStorage';
 import App from './App';
 
-export const muiCache = createCache({
-  'key': 'mui',
-  'prepend': true,
-});
-  
 const store = setupStore();
 
 store.dispatch(storage.loadThemeState);
@@ -23,11 +15,9 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <CacheProvider value={muiCache}>
       <Provider store={store}>
         <App />
       </Provider>
-    </CacheProvider>
   </React.StrictMode>
 );
 
