@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { useAppDispatch, useAppSelector,  } from 'redux/hooks';
-import { selectTictactoeState, resetTictactoe, makeMove  } from 'redux/slices/tictactoeSlice';
-import { initialTictactoe } from 'models/ITictactoe';
-import Tictactoe from 'redux/Tictactoe';
-import TTTComPlay from 'redux/tttcomplay';
+import { useAppDispatch, useAppSelector,  } from 'features/hooks';
+import { selectTictactoeState, resetTictactoe, makeMove  } from 'features/slices/tictactoeSlice';
+import { initialTictactoe } from '../../models/ITictactoe';
+import Tictactoe from 'features/Tictactoe';
+import TTTComPlay from 'features/tttcomplay';
 
 import Row from './Row';
 import 'styles/tictactoeStyles.scss';

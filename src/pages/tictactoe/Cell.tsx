@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { TCell } from 'models/ITictactoe';
-import { useAppDispatch } from 'redux/hooks';
-import { makeMove } from 'redux/slices/tictactoeSlice';
+import { TCell } from '../../models/ITictactoe';
+import { useAppDispatch } from '../../features/hooks';
+import { makeMove } from '../../features/slices/tictactoeSlice';
 
 import 'styles/cellStyles.scss';
 

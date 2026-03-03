@@ -1,5 +1,5 @@
-import { IThemeState } from "models/ITheme";
-import { ITictactoeState, initialTictactoeState } from "models/ITictactoe";
+import { IThemeState } from "../models/ITheme";
+import { ITictactoeState, initialTictactoeState } from "../models/ITictactoe";
 
 const storageThemeKey = 'anAppTheme';
 const storageTictactoeKey = 'anAppTictactoe';

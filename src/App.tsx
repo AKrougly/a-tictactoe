@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-import TictactoeGame from 'pages/tictactoe/Tictactoe';
+import TictactoeGame from './pages/tictactoe/Tictactoe';
 
 const App: React.FC = (): React.ReactElement => {
 

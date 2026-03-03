@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import storage from "utils/localStorage";
-import { /*ITictactoe,*/ ITictactoeState, initialTictactoeState, TCell } from 'models/ITictactoe';
+import { /*ITictactoe,*/ ITictactoeState, initialTictactoeState, TCell } from '../../models/ITictactoe';
 import { CTictactoe } from 'pages/tictactoe/Tictactoe';
 import { RootState, AppThunk } from '../store';
 

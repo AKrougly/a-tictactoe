@@ -1,4 +1,4 @@
-import { ITictactoe, initialTictactoe, TBoard, TCell, TCells } from 'models/ITictactoe';
+import { ITictactoe, initialTictactoe, TBoard, TCell, TCells } from '../models/ITictactoe';
 
 const WINNING_COMBOS: TCells[] = [
   [0, 3, 6], // Left side

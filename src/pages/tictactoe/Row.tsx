@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { TBoard } from 'models/ITictactoe';
+import { TBoard } from '../../models/ITictactoe';
 import Cell from './Cell';
 
 import 'styles/rowStyles.scss';

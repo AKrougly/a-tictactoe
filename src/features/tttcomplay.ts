@@ -9,8 +9,8 @@
  *   https://github.com/awkaiser/react-tictactoe
  */
 
-import { TBoard, TCell, TCells } from 'models/ITictactoe';
-import Tictactoe from 'redux/Tictactoe';
+import { TBoard, TCell, TCells } from '../models/ITictactoe';
+import Tictactoe from 'features/Tictactoe';
 
 const CORNERS: TCells = [0, 2, 6, 8];
 const MAX_DEPTH = 9;
